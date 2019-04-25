@@ -1,0 +1,27 @@
+
+    /* ---------------------------------------
+    ##### - CUSTOM CSS HERE - #####
+    --------------------------------------- */
+	
+	.category-header{
+		color: white;
+		background: green;
+		padding: 6px;
+		margin: 5px;
+	}
+	
+	.rating-star{
+		color: #fbb710;
+	}
+	
+	.auction-digit{
+		font-size: 1.25em;
+    }
+    
+    .auction-text{
+		font-size: 0.65em;
+    }
+    
+    .img-upsell{
+    	height: 80% !important;
+   }

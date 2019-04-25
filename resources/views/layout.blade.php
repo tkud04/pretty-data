@@ -1,0 +1,7 @@
+@include("head")
+@include("header")
+@include("sidebar")
+@include("breadcrumb")
+@yield("content")
+@include("footer")
+@include("foot")
