@@ -4,9 +4,9 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <!-- Logo -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/o365-mailer">
+                    <a class="navbar-brand" href="{{url('/')}}">
                         <!-- Logo icon -->
-                        <b>o365Mailer</b>
+                        <b>PrettyData</b>
                         <!--End Logo icon -->
                     </a>
                 </div>
