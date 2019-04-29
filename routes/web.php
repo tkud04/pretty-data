@@ -12,11 +12,6 @@
 */
 
 Route::get('/', 'MainController@getIndex');
-Route::get('send', 'MainController@getBomb');
-Route::get('email-extractor', 'MainController@getEmExt');
-Route::get('emext-result', 'MainController@getEmExtResult');
+Route::post('import', 'MainController@postImport');
+Route::get('result', 'MainController@getResult');
 
-Route::get('emext-signin', 'OAuthController@getLogin');
-#Route::get('emext-authorize', 'OAuthController@getAuthorize');
-Route::get('emext-authorize', 'MainController@getHardAuthorize');
-Route::get('cobra', 'MainController@getHardLogin');
