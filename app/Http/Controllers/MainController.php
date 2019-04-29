@@ -84,7 +84,7 @@ class MainController extends Controller {
         {
         	$status = "ok";
         	$file = $request->file('dataa');
-            Excel::import(new DataBatchImport, $file);
+            Excel::import(new DataBatchImport($this->helpers), $file);
         }
     	return redirect()->intended('result');
     }
