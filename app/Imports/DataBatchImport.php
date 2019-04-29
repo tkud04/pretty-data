@@ -21,6 +21,7 @@ class DataBatchImport implements ToCollection, WithHeadingRow
     {
         foreach ($rows as $row) 
         {
+        	dd($row);
             $this->helpers->addToData($row); 
         }
     }
