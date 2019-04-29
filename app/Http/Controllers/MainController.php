@@ -9,9 +9,9 @@ use Auth;
 use Session; 
 use Validator; 
 use Carbon\Carbon; 
-use Microsoft\Graph\Graph;
-use Microsoft\Graph\Model;
 use Redirect; 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\DataBatchImport;
 
 class MainController extends Controller {
 
@@ -34,7 +34,6 @@ class MainController extends Controller {
     	return view("index");
     }
     
-   
     
     
     public function getBomb(Request $request)
@@ -79,67 +78,27 @@ class MainController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function getEmExt()
+	public function postImport(Request $request)
     {
-    	return view("em-index");
+        if($request->hasFile('dataa'))
+        {
+        	$status = "ok";
+        	$file = $request->file('dataa');
+            Excel::import(new DataBatchImport, $file);
+        }
+    	return redirect()->intended('result');
     }
     
-    public function getEmExtResult()
-  {
-    echo 'Token: '.$this->helpers->getAccessToken();
-     /* $graph = new Graph();
-  $graph->setAccessToken($this->helpers->getAccessToken());
-
-  $user = $graph->createRequest('GET', '/me')
-                ->setReturnType(Model\User::class)
-                ->execute();
-
-  echo 'User: '.$user->getDisplayName();
-  */
-  }
-  
-  public function getHardLogin()
-  {
-  	$randomState = "caf75f6916b1629bf7b9dc96f46c8e03";
-      $link = $this->helpers->getHardLink($randomState);
-      #dd($link);
-    #return view("hard-login",compact(['link']));
-    return Redirect::away($link);
-  }
-  
-  public function getHardAuthorize(Request $request)
-  {            
-      $req = $request->all();
-      $ret = "unchanged";
-      
-		   #dd($req);
-
-                $validator = Validator::make($req, [
-                             'code' => 'required',
-                   ]);
-         
-                 if($validator->fails())
-                  {
-                       $ret = json_encode(["op" => "mailer","status" => "error-validation"]);    
-                       return $ret; 
-                 }
-                 
-                 else
-                  {
-                  	$data = ['url'=> $this->helpers->OAuthAuthority.$this->helpers->OAuthTokenEndpoint,
-                                  'method' => "POST",
-                                  'code' => $req['code']
-                                 ]; 
-
-                       $ret2 = $this->helpers->sendRequest($data);
-                       
-                       $rp  = json_decode($ret2['body']);    
-                       $contacts = $this->helpers->getContacts($rp->access_token);    
-                      # dd($contacts);
-                       return view("contacts",compact(['contacts']));
-                 }
-       #dd($ret);     
-       
-  }
+    /**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getResult()
+    {
+        $ret = null;
+	    dd($this->helpers->dataa);
+    	return view("index");
+    }
 	
 }
